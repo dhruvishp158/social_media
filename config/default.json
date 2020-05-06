@@ -1,4 +1,6 @@
 {
   "mongoURI": "mongodb+srv://dhruvish:dhruvish@cluster0-yrsov.mongodb.net/test?retryWrites=true&w=majority",
-  "jwtSecret": "mySecret"
+  "jwtSecret": "mySecret",
+  "githubClientId": "86c01dc1582a6e5f7a03",
+  "githubSecret": "fafa4d8a29275610885e99f8275e08ba02e96595"
 }
