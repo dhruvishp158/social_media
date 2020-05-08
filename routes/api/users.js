@@ -28,8 +28,9 @@ router.post(
 
     const { name, email, password } = req.body;
     //see if user exist
-    let user = await Users.findOne({ email });
+
     try {
+      let user = await Users.findOne({ email });
       if (user) {
         return res
           .status(400)
