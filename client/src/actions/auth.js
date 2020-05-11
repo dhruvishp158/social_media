@@ -6,6 +6,7 @@ import {
   LOGIN_SUCCESS,
   LOGIN_FAIL,
   LOGOUT,
+  CLEAR_PROFILE,
 } from "./types";
 import { setAlert } from "./alert";
 import axios from "axios";
@@ -18,6 +19,8 @@ export const loadUser = () => async (dispatch) => {
   }
   try {
     const res = await axios.get("/api/auth");
+    console.log(res);
+
     dispatch({
       type: USER_LOADED,
       payload: res.data,
@@ -82,6 +85,9 @@ export const login = (email, password) => async (dispatch) => {
 
 //LOGOUT
 export const logout = () => (dispatch) => {
+  dispatch({
+    type: CLEAR_PROFILE,
+  });
   dispatch({
     type: LOGOUT,
   });

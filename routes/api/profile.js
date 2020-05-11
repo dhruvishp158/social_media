@@ -6,7 +6,7 @@ const Users = require("../../Models/Users");
 const { check, validationResult } = require("express-validator"); //check express validation docs
 const request = require("request");
 const config = require("config");
-
+const Post = require("../../Models/Post");
 //@route  GET api/profile/me
 //@desc   get current user profile
 //@access private
@@ -19,6 +19,7 @@ router.get("/me", auth, async (req, res) => {
     if (!profile) {
       return res.status(400).json({ msg: "There is no profile for this user" });
     }
+    res.json(profile);
   } catch (err) {
     console.error(err.message);
     res.status(500).send("server error");
@@ -145,6 +146,7 @@ router.delete("/", auth, async (req, res) => {
   try {
     //Delete post
 
+    await Post.deleteMany({ user: req.user.id });
     //delete profile
     await Profile.findOneAndRemove({
       user: req.user.id,
