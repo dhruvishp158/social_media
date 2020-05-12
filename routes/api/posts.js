@@ -114,7 +114,7 @@ router.put("/likes/:id", auth, async (req, res) => {
     }
     post.likes.unshift({ user: req.user.id });
     await post.save();
-    res.json(post);
+    res.json(post.likes);
   } catch (error) {
     console.error(error.message);
     res.status(500).send("server error");
@@ -154,7 +154,7 @@ router.put("/unlike/:id", auth, async (req, res) => {
 //@desc   add comment to post
 //@access private
 router.post(
-  "/comment/:id/:comment_id",
+  "/comment/:id",
   [auth, [check("text", "text is required").not().isEmpty()]],
   async (req, res) => {
     const errors = validationResult(req);
@@ -174,7 +174,7 @@ router.post(
 
       post.comments.unshift(newComment);
       await post.save();
-      res.json(post);
+      res.json(post.comments);
     } catch (error) {
       console.error(error.message);
       res.status(500).send("server error");
@@ -207,7 +207,7 @@ router.delete("/comment/:id/:comment_id", auth, async (req, res) => {
       .indexOf(req.user.id);
     post.comments.splice(removeIndex, 1);
     await post.save();
-    res.json(post);
+    res.json(post.comments);
   } catch (error) {
     console.error(error.message);
     if (error.kind === "ObjectId") {

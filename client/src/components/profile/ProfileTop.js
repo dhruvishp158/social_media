@@ -58,7 +58,7 @@ const ProfileTop = ({
 };
 
 ProfileTop.propTypes = {
-  profile: PropTypes.func.isRequired,
+  profile: PropTypes.object.isRequired,
 };
 
 export default ProfileTop;
